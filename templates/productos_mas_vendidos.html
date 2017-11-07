@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+<br>
+<h2>Productos mas Vendidos</h2>
+<br>
+
+<div class="page-header">    
+ 	<table class="table table-striped">
+ 		<th>Productos</th>
+ 		<th>Cantidad</th>
+		{% for producto, cantidad in productos_mas_vendidos %}
+		<tr>
+			<td>{{producto}}</td>
+			<td>{{cantidad}}</td>
+		</th>
+		{% endfor %} 		
+ 	</table>   
+</div>
+{% endblock %}

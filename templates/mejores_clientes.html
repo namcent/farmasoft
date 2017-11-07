@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+<br>
+<h2>Mejores Clientes</h2>
+<br>
+
+<div class="page-header">    
+ 	<table class="table table-striped">
+ 		<th>Cliente</th>
+ 		<th>Cantidad gastada</th>
+		{% for cliente, cantidad_gastada in mejores_clientes %}
+		<tr>
+			<td>{{cliente}}</td>
+			<td>{{cantidad_gastada}}</td>
+		</th>
+		{% endfor %} 		
+ 	</table>   
+</div>
+{% endblock %}

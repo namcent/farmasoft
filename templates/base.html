@@ -1,0 +1,104 @@
+{% extends "bootstrap/base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.png') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename = 'favicon.png') }}" type="image/x-icon">
+<style type="text/css">
+    .dropdown-toggle {
+        display: inline-block; margin-top: 15px; color: #9D9D9D; cursor: pointer; text-decoration: none;
+    }
+    .dropdown-toggle:hover {
+        text-decoration: none;
+        color: white; 
+    }
+    .nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
+        background: none;
+    }
+</style> 
+
+{% endblock %}
+
+{% block title %}FarmaSoft {{ nombre }}{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">FarmaSoft</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                {% if session.username %}
+
+                <li>
+
+                <div class="dropdown">
+                  <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="">Consultas
+                  <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/ultimas_ventas">Ultimas ventas</a></li>
+                    <li><a href="/clientes_por_producto">Clientes por producto</a></li>
+                    <li><a href="/producto_por_cliente">Productos por cliente</a></li>
+                    <li><a href="/productos_mas_vendidos">Productos mas vendidos</a></li>
+                    <li><a href="/mejores_clientes">Mejores clientes</a></li>
+                  </ul>
+                </div> 
+
+                </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout">Salir</a></li>
+                </ul>
+
+                {% else %}
+                
+                <li><a href="/ingresar">Ingresar</a></li>
+                
+                <li><a href="/registrar">Registrarse</a></li>
+                
+                {% endif %}
+
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.selector2').select2({placeholder: "Buscar...", minimumInputLength: 1});
+});
+
+$('#cliente-selector').on("select2:select", function(e) { 
+    $("#cliente-form")[0].submit();
+});
+
+
+$('#producto-selector').on("select2:select", function(e) { 
+    $("#producto-form")[0].submit();
+});
+</script>
+{% endblock %}

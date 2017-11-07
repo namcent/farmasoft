@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<br>
+<h2>Clientes por Producto</h2>
+<br>
+
+<form id="producto-form"  method="get" action="clientes_por_producto">
+<label>Ingrese el producto:</label>
+
+<select id="producto-selector" class="selector2" name="producto" class="form-control">
+<option selected="selected"></option>
+{% for option in options %}
+<option>{{option}}</option>
+{% endfor %}
+
+</select>
+</form>
+
+{% if not resultados and producto %}
+<br>
+<div class="error">No se encuentra ningun registro para su busqueda.</div>
+{% endif %}
+<div class="page-header">    
+ 	<table class="table table-striped">
+ 		{% for header in headers %}
+ 		<th>{{header}}</th>
+ 		{% endfor %}	
+		{% for row in rows %}
+		<tr>
+			<td>{{row.0}}</td>
+			<td>{{row.1}}</td>
+			<td>{{row.2}}</td>
+			<td>{{row.3}}</td>
+			<td>{{row.4}}</td>
+		</th>
+		{% endfor %} 		
+ 	</table>   
+</div>
+{% endblock %}

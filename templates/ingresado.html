@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Bienvenido{% endblock %}
+
+{% block page_content %}
+<div class="page-header">    
+    <div class="page-header">    
+    <h1>Bienvenido {{session.username}} !</h1>
+    </br>
+</div>
+<br>
+<h2>Ultimas Ventas</h2>
+<br>
+<div class="page-header">    
+ 	<table class="table table-striped">
+ 		{% for header in headers %}
+ 		<th>{{header}}</th>
+ 		{% endfor %}
+		{% for row in rows %}
+		<tr>
+			<td>{{row.0}}</td>
+			<td>{{row.1}}</td>
+			<td>{{row.2}}</td>
+			<td>{{row.3}}</td>
+			<td>{{row.4}}</td>
+		</th>
+		{% endfor %} 		
+ 	</table>   
+</div>
+{% endblock %}
